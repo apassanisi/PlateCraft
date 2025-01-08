@@ -22,6 +22,11 @@ const IngredientInput = ({ onGenerate }: { onGenerate: (ingredients: string[]) =
     }
   };
 
+  const handleGenerate = () => {
+    onGenerate(ingredients);
+    setIngredients([]); // Clear ingredients
+  };
+
   return (
     <div className="p-6 bg-white dark:bg-gray-800 rounded-lg shadow-md max-w-lg mx-auto">
       <h1 className="text-3xl font-bold text-primary mb-4">What’s in Your Kitchen?</h1>
@@ -58,7 +63,7 @@ const IngredientInput = ({ onGenerate }: { onGenerate: (ingredients: string[]) =
         ))}
       </div>
       <button
-        onClick={() => onGenerate(ingredients)}
+        onClick={handleGenerate}
         className="mt-6 w-full bg-primary text-white py-2 rounded transition-all"
       >
         Generate Recipe

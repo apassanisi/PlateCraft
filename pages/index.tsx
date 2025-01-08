@@ -11,11 +11,21 @@ const Home = () => {
   const [recipe, setRecipe] = useState<string | null>(null);
   const [imageUrl, setImageUrl] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
+  const [ingredients, setIngredients] = useState<string | null>(null);
+  const [title, setTitle] = useState<string | null>(null);
+  const [tasteDescription, setTasteDescription] = useState<string | null>(null);
+  const [instructions, setInstructions] = useState<string | null>(null);
+  const [imageLoaded, setImageLoaded] = useState(false);
 
   const generateRecipe = async (ingredients: string[]) => {
     setLoading(true);
     setRecipe(null);
     setImageUrl(null);
+    setTitle(null);
+    setTasteDescription(null);
+    setIngredients(null);
+    setInstructions(null);
+    setImageLoaded(false);
 
     try {
       console.log('Sending ingredients:', ingredients);
@@ -32,6 +42,10 @@ const Home = () => {
       console.log('Data received:', data);
       setRecipe(data.recipe);
       setImageUrl(data.imageUrl);
+      setTitle(data.title);
+      setTasteDescription(data.tasteDescription);
+      setIngredients(data.ingredients);
+      setInstructions(data.instructions);
     } catch (error) {
       console.error("Error generating recipe:", error);
     } finally {
@@ -43,7 +57,14 @@ const Home = () => {
     <div className="min-h-screen bg-background p-6">
       <IngredientInput onGenerate={generateRecipe} />
       {loading && <LoadingSpinner />}
-      {recipe && imageUrl && <RecipeCard recipe={recipe} imageUrl={imageUrl} />}
+      {recipe && imageUrl && title && tasteDescription && ingredients && instructions && (
+        <div>
+          <img src={imageUrl} alt="Recipe" onLoad={() => setImageLoaded(true)} style={{ display: 'none' }} />
+          {imageLoaded && (
+            <RecipeCard recipe={recipe} imageUrl={imageUrl} title={title} tasteDescription={tasteDescription} ingredients={ingredients} instructions={instructions} />
+          )}
+        </div>
+      )}
     </div>
   );
 };
