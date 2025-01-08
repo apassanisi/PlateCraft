@@ -20,28 +20,28 @@ export default function RootLayout({
       <Head>
         <meta charSet="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <meta name="description" content={metadata.description} />
+        <meta name="description" content={metadata.description ?? ''} />
         <meta name="keywords" content="recipe generator, PlateCraft, cooking, ingredients, food, recipes" />
         <meta name="author" content="PlateCraft" />
         
         {/* Open Graph tags */}
-        <meta property="og:title" content={metadata.title} />
-        <meta property="og:description" content={metadata.description} />
+        <meta property="og:title" content={String(metadata.title) ?? ''} />
+        <meta property="og:description" content={metadata.description ?? ''} />
         <meta property="og:image" content="/og-image.jpg" />
         <meta property="og:url" content="https://yourdomain.com" />
         <meta property="og:type" content="website" />
         
         {/* Twitter Card tags */}
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content={metadata.title} />
-        <meta name="twitter:description" content={metadata.description} />
+        <meta name="twitter:title" content={String(metadata.title) ?? ''} />
+        <meta name="twitter:description" content={metadata.description ?? ''} />
         <meta name="twitter:image" content="/twitter-image.jpg" />
         <meta name="twitter:site" content="@PlateCraft" />
         
         {/* Favicon */}
         <link rel="icon" href="/favicon.ico" />
         
-        <title>{metadata.title}</title>
+        <title>{String(metadata.title) ?? 'PlateCraft'}</title>
       </Head>
       <body className={`${inter.className} bg-background text-foreground`}>
         <header className="bg-primary text-white p-4 shadow-md">
