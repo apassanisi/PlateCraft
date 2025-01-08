@@ -30,7 +30,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     });
 
     console.log('OpenAI response:', response);
-    const recipe = response.choices[0].message.content.trim();
+    const recipe = response.choices[0]?.message?.content?.trim() ?? 'No recipe generated';
     console.log('Recipe generated:', recipe);
 
     const imageResponse = await openai.images.generate({
