@@ -8,23 +8,27 @@ import '../app/globals.css';
 
 // Main Page
 const Home = () => {
-  const [recipe, setRecipe] = useState<string | null>(null);
-  const [imageUrl, setImageUrl] = useState<string | null>(null);
+  const [recipeData, setRecipeData] = useState({
+    recipe: null,
+    imageUrl: null,
+    title: null,
+    tasteDescription: null,
+    ingredients: null,
+    instructions: null,
+  });
   const [loading, setLoading] = useState(false);
-  const [ingredients, setIngredients] = useState<string | null>(null);
-  const [title, setTitle] = useState<string | null>(null);
-  const [tasteDescription, setTasteDescription] = useState<string | null>(null);
-  const [instructions, setInstructions] = useState<string | null>(null);
   const [imageLoaded, setImageLoaded] = useState(false);
 
   const generateRecipe = async (ingredients: string[]) => {
     setLoading(true);
-    setRecipe(null);
-    setImageUrl(null);
-    setTitle(null);
-    setTasteDescription(null);
-    setIngredients(null);
-    setInstructions(null);
+    setRecipeData({
+      recipe: null,
+      imageUrl: null,
+      title: null,
+      tasteDescription: null,
+      ingredients: null,
+      instructions: null,
+    });
     setImageLoaded(false);
 
     try {
@@ -40,18 +44,22 @@ const Home = () => {
       }
       const data = await response.json();
       console.log('Data received:', data);
-      setRecipe(data.recipe);
-      setImageUrl(data.imageUrl);
-      setTitle(data.title);
-      setTasteDescription(data.tasteDescription);
-      setIngredients(data.ingredients);
-      setInstructions(data.instructions);
+      setRecipeData({
+        recipe: data.recipe,
+        imageUrl: data.imageUrl,
+        title: data.title,
+        tasteDescription: data.tasteDescription,
+        ingredients: data.ingredients,
+        instructions: data.instructions,
+      });
     } catch (error) {
       console.error("Error generating recipe:", error);
     } finally {
       setLoading(false);
     }
   };
+
+  const { recipe, imageUrl, title, tasteDescription, ingredients, instructions } = recipeData;
 
   return (
     <div className="min-h-screen bg-background p-6">
