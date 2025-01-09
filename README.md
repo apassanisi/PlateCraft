@@ -1,6 +1,6 @@
 <div align="center">
   <h2 align="center">🍽️ PlateCraft</h2>
-  <p align="center">A comprehensive system for generating recipes based on available ingredients
+  <p align="center">A small app for generating recipes based on available ingredients
     <br />
 <a href="https://platecraft.netlify.app" style=""><strong>View live »</strong></a>
 
